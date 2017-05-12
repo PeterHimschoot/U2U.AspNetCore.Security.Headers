@@ -17,10 +17,12 @@ namespace U2U.AspNetCore.Security.Headers
 
     public async Task Invoke(HttpContext context)
     {
+      context.Response.OnStarting(state =>
+      {
+        this.headers(context.Response.Headers);
+        return Task.FromResult(0);
+      }, null);
       await next(context);
-
-      var responseHeaders = context.Response.Headers;
-      this.headers(responseHeaders);
     }
   }
 }

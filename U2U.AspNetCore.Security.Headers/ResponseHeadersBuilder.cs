@@ -20,7 +20,5 @@ namespace U2U.AspNetCore.Security.Headers
     {
       setter += (headers) => headers.Remove(header);
     }
-
-    // Add extra methods here...
   }
 }
