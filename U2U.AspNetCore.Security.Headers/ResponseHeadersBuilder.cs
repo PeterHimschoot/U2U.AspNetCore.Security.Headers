@@ -20,5 +20,29 @@ namespace U2U.AspNetCore.Security.Headers
     {
       setter += (headers) => headers.Remove(header);
     }
+
+    public void SetStrictTransportSecurity(StrictTransportSecurity hsts)
+    {
+      this.SetHeader("Strict-Transport-Security", hsts.ToHeader());
+    }
+    public void SetContentSecurityPolicy(ContentSecurityPolicy policy)
+    {
+      StringBuilder csp = new StringBuilder();
+
+      if (policy.DefaultSrc != null)
+      {
+        csp.Append($"default-src {policy.DefaultSrc};");
+      }
+      if (policy.ScriptSrc != null)
+      {
+        csp.Append($"script-src {policy.ScriptSrc};");
+      }
+      if (policy.StyleSrc != null)
+      {
+        csp.Append($"style-src {policy.StyleSrc};");
+      }
+
+      this.SetHeader("Content-Security-Policy", csp.ToString());
+    }
   }
 }

@@ -50,6 +50,18 @@ namespace TestWebSite
       app.UseResponseHeaders(builder =>
       {
         builder.SetHeader("Test", "ABC");
+
+        builder.SetStrictTransportSecurity(new StrictTransportSecurity
+        {
+          MaxAge = TimeSpan.FromDays(10)
+        });
+        // builder.SetHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self';");
+        builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+        {
+          DefaultSrc = ContentSecurityPolicy.Source.Self,
+          ScriptSrc = ContentSecurityPolicy.Source.Self,
+          StyleSrc = ContentSecurityPolicy.Source.Self
+        });
       });
 
       app.UseStaticFiles();
