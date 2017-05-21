@@ -29,18 +29,19 @@ namespace U2U.AspNetCore.Security.Headers
       var referrer = headersDictionary[HeaderNames.Referer].ToString();
 
       // if referer header is missing, or not using the current web site then consider this a problem
-      if (string.IsNullOrEmpty(referrer) || !referrer.StartsWith(applicationUrl))
+      if (!string.IsNullOrEmpty(referrer) && !referrer.StartsWith(applicationUrl))
       {
+        context.Response.StatusCode = options.StatusCode ?? StatusCodes.Status400BadRequest;
         if (options.HandleWithHotLinkImage)
         {
           var unauthorizedImagePath = Path.Combine(rootFolder, options.HotLinkImagePath);
           await context.Response.SendFileAsync(unauthorizedImagePath);
         }
-        // Fall through
-        context.Response.StatusCode = options.StatusCode ?? StatusCodes.Status400BadRequest;
       }
-
-      await next(context);
+      else
+      {
+        await next(context);
+      }
     }
   }
 }

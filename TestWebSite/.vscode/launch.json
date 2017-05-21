@@ -18,7 +18,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+      "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/TestWebSite.dll",
       "args": [],
       "cwd": "${workspaceRoot}",
       "stopAtEntry": false,

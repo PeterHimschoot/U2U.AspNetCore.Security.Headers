@@ -29,6 +29,8 @@ namespace TestWebSite
     {
       // Add framework services.
       services.AddMvc();
+      services.AddNameOf();
+      services.AddMarkdown();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,22 +49,21 @@ namespace TestWebSite
         app.UseExceptionHandler("/Home/Error");
       }
 
-      app.UseResponseHeaders(builder =>
-      {
-        builder.SetHeader("Test", "ABC");
+      app.UsePreventHotLinking("images/HotLink.jpeg");
 
-        builder.SetStrictTransportSecurity(new StrictTransportSecurity
-        {
-          MaxAge = TimeSpan.FromDays(10)
-        });
-        // builder.SetHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self';");
-        builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
-        {
-          DefaultSrc = ContentSecurityPolicy.Source.Self,
-          ScriptSrc = ContentSecurityPolicy.Source.Self,
-          StyleSrc = ContentSecurityPolicy.Source.Self
-        });
-      });
+    //   app.UseResponseHeaders(builder =>
+    //   {
+    //     builder.SetStrictTransportSecurity(new StrictTransportSecurity
+    //     {
+    //       MaxAge = TimeSpan.FromDays(10)
+    //     });
+    //     builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+    //     {
+    //       DefaultSrc = ContentSecurityPolicy.Source.Self,
+    //       ScriptSrc = ContentSecurityPolicy.Source.Self,
+    //       StyleSrc = ContentSecurityPolicy.Source.Self
+    //     });
+    //   });
 
       app.UseStaticFiles();
 

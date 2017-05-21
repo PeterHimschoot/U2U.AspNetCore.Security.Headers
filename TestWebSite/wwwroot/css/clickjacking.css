@@ -1,0 +1,17 @@
+#frame {
+  height: 800px;
+}
+
+iframe {
+  width: 1200px;
+  height: 800px;
+  opacity: 0.5; /* in real life this would be 0.0 */
+  z-index: -1; /* make if forefront */
+  position: absolute;
+}
+
+#bait {
+  position: absolute;
+  top: 200px;
+  left: 300px;
+}

@@ -1,10 +1,12 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@using TestWebSite.Controllers
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TestWebSite</title>
+    <title>@ViewData["Title"] - Security Headers</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -17,6 +19,8 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
+    @RenderSection("Styles", required: false)
+</body>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,10 +36,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li>
+                      <a asp-controller="@nameof(VulnerableController )"
+                         asp-action="@nameof(VulnerableController.ClickJacking)">Click Jacking</a>
+                    </li>
+                    <li>
+                      <a asp-controller="@nameof(VulnerableController )"
+                         asp-action="@nameof(VulnerableController.HotLinking)">Hot Linking</a>
+                    </li>
+                    </ul>
             </div>
         </div>
     </nav>
@@ -43,7 +53,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - TestWebSite</p>
+            <p>&copy; 2017 - Peter Himschoot</p>
         </footer>
     </div>
 
