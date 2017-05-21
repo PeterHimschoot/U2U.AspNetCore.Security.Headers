@@ -51,19 +51,21 @@ namespace TestWebSite
 
       app.UsePreventHotLinking("images/HotLink.jpeg");
 
-    //   app.UseResponseHeaders(builder =>
-    //   {
-    //     builder.SetStrictTransportSecurity(new StrictTransportSecurity
-    //     {
-    //       MaxAge = TimeSpan.FromDays(10)
-    //     });
-    //     builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
-    //     {
-    //       DefaultSrc = ContentSecurityPolicy.Source.Self,
-    //       ScriptSrc = ContentSecurityPolicy.Source.Self,
-    //       StyleSrc = ContentSecurityPolicy.Source.Self
-    //     });
-    //   });
+      app.UseResponseHeaders(builder =>
+      {
+        builder.SetStrictTransportSecurity(new StrictTransportSecurity
+        {
+          MaxAge = TimeSpan.FromDays(10),
+          IncludeSubdomains = true
+        });
+
+        //     builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+        //     {
+        //       DefaultSrc = ContentSecurityPolicy.Source.Self,
+        //       ScriptSrc = ContentSecurityPolicy.Source.Self,
+        //       StyleSrc = ContentSecurityPolicy.Source.Self
+        //     });
+      });
 
       app.UseStaticFiles();
 
