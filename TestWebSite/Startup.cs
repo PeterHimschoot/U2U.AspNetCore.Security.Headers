@@ -49,22 +49,24 @@ namespace TestWebSite
         app.UseExceptionHandler("/Home/Error");
       }
 
-      app.UsePreventHotLinking("images/HotLink.jpeg");
+      // app.UsePreventHotLinking("images/HotLink.jpeg");
 
       app.UseResponseHeaders(builder =>
       {
         builder.SetStrictTransportSecurity(new StrictTransportSecurity
         {
-          MaxAge = TimeSpan.FromDays(10),
-          IncludeSubdomains = true
+          MaxAge = TimeSpan.FromDays(1),
+          IncludeSubdomains = true,
+          Preload = false
         });
 
-        //     builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
-        //     {
+            builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+            {
+                FrameAncestors = ContentSecurityPolicy.Source.None
         //       DefaultSrc = ContentSecurityPolicy.Source.Self,
         //       ScriptSrc = ContentSecurityPolicy.Source.Self,
         //       StyleSrc = ContentSecurityPolicy.Source.Self
-        //     });
+            });
       });
 
       app.UseStaticFiles();

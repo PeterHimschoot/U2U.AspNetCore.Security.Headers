@@ -1,16 +1,20 @@
 using System;
 using System.Text;
-public class ContentSecurityPolicy {
+public class ContentSecurityPolicy
+{
 
-   public static class Source {
+  public static class Source
+  {
     public static string Any = "*";
     public static string None = "'none'";
     public static string Self = "'self'";
   }
 
-   public string DefaultSrc { get; set; }
-   public string ScriptSrc { get; set; }
-   public string StyleSrc { get; set; }
+  public string DefaultSrc { get; set; }
+  public string ScriptSrc { get; set; }
+  public string StyleSrc { get; set; }
+
+  public string FrameAncestors { get; set; }
 
   public string ToHeader()
   {
@@ -28,6 +32,11 @@ public class ContentSecurityPolicy {
     {
       csp.Append($"style-src {this.StyleSrc};");
     }
+    if (this.FrameAncestors != null)
+    {
+      csp.Append($"frame-ancestors {this.FrameAncestors}");
+    }
+
     return csp.ToString();
   }
 }
