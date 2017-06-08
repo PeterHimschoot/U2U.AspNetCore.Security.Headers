@@ -60,13 +60,20 @@ namespace TestWebSite
           Preload = false
         });
 
-            builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
-            {
-                FrameAncestors = ContentSecurityPolicy.Source.None
+        builder.SetPublicKeyPinning(new PublicKeyPinning
+        {
+          MaxAge = TimeSpan.FromMinutes(10),
+          IncludeSubdomains = true,
+          Pins = new List<string> { "yh0kYiYm4YN+0DAKp4bB16pGqrQq9btXHMeR9jz834o=" }
+        });
+
+        // builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+        // {
+        //     FrameAncestors = ContentSecurityPolicy.Source.None
         //       DefaultSrc = ContentSecurityPolicy.Source.Self,
         //       ScriptSrc = ContentSecurityPolicy.Source.Self,
         //       StyleSrc = ContentSecurityPolicy.Source.Self
-            });
+        // });
       });
 
       app.UseStaticFiles();

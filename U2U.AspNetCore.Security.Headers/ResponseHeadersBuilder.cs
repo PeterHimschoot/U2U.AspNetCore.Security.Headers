@@ -26,8 +26,10 @@ namespace U2U.AspNetCore.Security.Headers
       this.SetHeader("Strict-Transport-Security", hsts.ToHeader());
     }
 
-public void SetPublicKeyPinning(PublicKeyPinning hpkp) {
-    this.SetHeader("Public-Key-Pins", hpkp.ToHeader());    }
+    public void SetPublicKeyPinning(PublicKeyPinning hpkp)
+    {
+      this.SetHeader("Public-Key-Pins", hpkp.ToHeader());
+    }
 
     public void SetContentSecurityPolicy(ContentSecurityPolicy policy)
     {

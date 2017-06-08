@@ -4,8 +4,8 @@ using System.Text;
 public class StrictTransportSecurity
 {
   public TimeSpan? MaxAge { get; set; }
-  public bool IncludeSubdomains { get; set; }
-  public bool Preload { get; set; }
+  public bool IncludeSubdomains { get; set; } = true;
+  public bool Preload { get; set; } = false;
 
   public string ToHeader() {
     StringBuilder hsts = new StringBuilder();

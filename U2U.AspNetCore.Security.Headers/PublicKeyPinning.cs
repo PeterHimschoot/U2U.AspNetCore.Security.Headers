@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class PublicKeyPinning
 {
-  public List<string> Pins { get; } = new List<string>();
+  public List<string> Pins { get; set; }
   public TimeSpan? MaxAge { get; set; }
   public string ReportUri { get; set; }
-  public bool IncludeSubdomains { get; set; }
+  public bool IncludeSubdomains { get; set; } = true;
   public string ToHeader()
   {
     StringBuilder bob = new StringBuilder();
