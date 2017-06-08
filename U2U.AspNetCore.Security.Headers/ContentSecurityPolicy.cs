@@ -1,8 +1,22 @@
 using System;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+
+static class ContentSourceExtensions
+{
+  public static void Append(this StringBuilder sb, List<string> sources)
+  {
+    foreach (var src in sources)
+    {
+      sb.Append($" {src}");
+    }
+    sb.Append(";");
+  }
+}
+
 public class ContentSecurityPolicy
 {
-
   public static class Source
   {
     public static string Any = "*";
@@ -10,9 +24,9 @@ public class ContentSecurityPolicy
     public static string Self = "'self'";
   }
 
-  public string DefaultSrc { get; set; }
-  public string ScriptSrc { get; set; }
-  public string StyleSrc { get; set; }
+  public List<string> DefaultSrc { get; set; }
+  public List<string> ScriptSrc { get; set; }
+  public List<string> StyleSrc { get; set; }
 
   public string FrameAncestors { get; set; }
 
@@ -20,18 +34,24 @@ public class ContentSecurityPolicy
   {
     StringBuilder csp = new StringBuilder();
 
-    if (this.DefaultSrc != null)
+    if (this.DefaultSrc != null && this.DefaultSrc.Any())
     {
-      csp.Append($"default-src {this.DefaultSrc};");
+      csp.Append($"default-src");
+      csp.Append(this.DefaultSrc);
     }
-    if (this.ScriptSrc != null)
+
+    if (this.ScriptSrc != null && this.ScriptSrc.Any())
     {
-      csp.Append($"script-src {this.ScriptSrc};");
+      csp.Append($"script-src");
+      csp.Append(this.ScriptSrc);
     }
-    if (this.StyleSrc != null)
+
+    if (this.StyleSrc != null && this.StyleSrc.Any())
     {
-      csp.Append($"style-src {this.StyleSrc};");
+      csp.Append($"style-src");
+      csp.Append(this.StyleSrc);
     }
+
     if (this.FrameAncestors != null)
     {
       csp.Append($"frame-ancestors {this.FrameAncestors}");

@@ -70,13 +70,21 @@ namespace TestWebSite
               }
         });
 
-        // builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
-        // {
-        //     FrameAncestors = ContentSecurityPolicy.Source.None
-        //       DefaultSrc = ContentSecurityPolicy.Source.Self,
-        //       ScriptSrc = ContentSecurityPolicy.Source.Self,
-        //       StyleSrc = ContentSecurityPolicy.Source.Self
-        // });
+        builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
+        {
+          FrameAncestors = ContentSecurityPolicy.Source.None,
+          DefaultSrc = new List<string> {
+              ContentSecurityPolicy.Source.Self
+          },
+          ScriptSrc = new List<string> {
+              ContentSecurityPolicy.Source.Self,
+              "https://ajax.aspnetcdn.com"
+          },
+          StyleSrc = new List<string> {
+              ContentSecurityPolicy.Source.Self,
+              "https://ajax.aspnetcdn.com"
+          }
+        });
       });
 
       app.UseStaticFiles();
