@@ -78,7 +78,8 @@ namespace TestWebSite
           },
           ScriptSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,
-              "https://ajax.aspnetcdn.com"
+              "https://ajax.aspnetcdn.com",
+              "'sha256-9FLqevjfni80Rt3z09prhe9sCFtWYVSaHXIcLZKWC+s='"
           },
           StyleSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,
