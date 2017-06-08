@@ -5,13 +5,13 @@ using System.Linq;
 
 static class ContentSourceExtensions
 {
-  public static void Append(this StringBuilder sb, List<string> sources)
+  public static void AppendContentSources(this StringBuilder sb, List<string> sources)
   {
     foreach (var src in sources)
     {
       sb.Append($" {src}");
     }
-    sb.Append(";");
+    sb.Append("; ");
   }
 }
 
@@ -37,19 +37,19 @@ public class ContentSecurityPolicy
     if (this.DefaultSrc != null && this.DefaultSrc.Any())
     {
       csp.Append($"default-src");
-      csp.Append(this.DefaultSrc);
+      csp.AppendContentSources(this.DefaultSrc);
     }
 
     if (this.ScriptSrc != null && this.ScriptSrc.Any())
     {
       csp.Append($"script-src");
-      csp.Append(this.ScriptSrc);
+      csp.AppendContentSources(this.ScriptSrc);
     }
 
     if (this.StyleSrc != null && this.StyleSrc.Any())
     {
       csp.Append($"style-src");
-      csp.Append(this.StyleSrc);
+      csp.AppendContentSources(this.StyleSrc);
     }
 
     if (this.FrameAncestors != null)
