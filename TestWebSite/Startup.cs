@@ -49,7 +49,7 @@ namespace TestWebSite
         app.UseExceptionHandler("/Home/Error");
       }
 
-      // app.UsePreventHotLinking("images/HotLink.jpeg");
+      app.UsePreventHotLinking("images/HotLink.jpeg");
 
       app.UseResponseHeaders(builder =>
       {

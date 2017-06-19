@@ -33,7 +33,9 @@ namespace U2U.AspNetCore.Security.Headers
 
     public void SetContentSecurityPolicy(ContentSecurityPolicy policy)
     {
-      this.SetHeader("Content-Security-Policy", policy.ToHeader());
+      string headerName =
+        (policy.ReportOnly) ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy";
+      this.SetHeader(headerName, policy.ToHeader());
     }
   }
 }
