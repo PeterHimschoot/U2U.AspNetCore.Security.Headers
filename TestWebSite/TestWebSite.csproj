@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\U2U.AspNetCore.Security.Headers\U2U.AspNetCore.Security.Headers.csproj" />
+    <ProjectReference Include="..\U2U.AspNetCore.Security.Headers.TagHelpers\U2U.AspNetCore.Security.Headers.TagHelpers.csproj" />
     <!--<ProjectReference Include="..\U2U.AspNetCore.Mvc.TagHelpers\U2U.AspNetCore.Mvc.TagHelpers.csproj" />-->
   </ItemGroup>
 

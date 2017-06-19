@@ -72,7 +72,7 @@ namespace TestWebSite
 
         builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
         {
-          FrameAncestors = ContentSecurityPolicy.Source.None,
+          FrameAncestors = new List<string>{ ContentSecurityPolicy.Source.None },
           DefaultSrc = new List<string> {
               ContentSecurityPolicy.Source.Self
           },
