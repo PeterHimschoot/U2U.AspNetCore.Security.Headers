@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 static class ContentSourceExtensions
 {
@@ -126,8 +127,11 @@ public class ContentSecurityPolicy
 /// </summary>
   public List<string> PluginTypes { get; set; }
 
-  public string ToHeader()
+  public string ToHeader(HttpContext context)
   {
+// TODO : retrieve nonces from context
+
+
     StringBuilder csp = new StringBuilder();
 
     if (this.DefaultSrc != null && this.DefaultSrc.Any())

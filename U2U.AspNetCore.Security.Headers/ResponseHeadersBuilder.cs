@@ -7,18 +7,22 @@ namespace U2U.AspNetCore.Security.Headers
 {
   public class ResponseHeadersBuilder
   {
-    private Action<IHeaderDictionary> setter = null;
+    private Action<IHeaderDictionary, HttpContext> setter = null;
 
-    public Action<IHeaderDictionary> Build() => setter;
+    public Action<IHeaderDictionary, HttpContext> Build() => setter;
 
     public void SetHeader(string header, string value)
     {
-      setter += (headers) => headers.Add(header, value);
+      setter += (headers, _) => headers.Add(header, value);
+    }
+
+    public void SetHeader(string header, Func<HttpContext, string> buildHeader) {
+      setter += (headers, context) => headers.Add(header, buildHeader(context));
     }
 
     public void RemoveHeader(string header)
     {
-      setter += (headers) => headers.Remove(header);
+      setter += (headers, _) => headers.Remove(header);
     }
 
     public void SetStrictTransportSecurity(StrictTransportSecurity hsts)
@@ -35,7 +39,7 @@ namespace U2U.AspNetCore.Security.Headers
     {
       string headerName =
         (policy.ReportOnly) ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy";
-      this.SetHeader(headerName, policy.ToHeader());
+      this.SetHeader(headerName, policy.ToHeader);
     }
   }
 }

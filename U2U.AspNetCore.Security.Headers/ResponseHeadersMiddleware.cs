@@ -8,18 +8,21 @@ namespace U2U.AspNetCore.Security.Headers
   {
     private readonly RequestDelegate next;
     private readonly Action<IHeaderDictionary> headers;
+    private readonly ResponseHeadersBuilder headerBuilder;
 
     public ResponseHeadersMiddleware(RequestDelegate next, ResponseHeadersBuilder reponseHeaders)
     {
       this.next = next;
-      this.headers = reponseHeaders.Build();
+      this.headerBuilder = reponseHeaders;
+      // this.headers = reponseHeaders.Build();
     }
 
     public async Task Invoke(HttpContext context)
     {
       context.Response.OnStarting(state =>
       {
-        this.headers(context.Response.Headers);
+        var headers = this.headerBuilder.Build();
+        headers(context.Response.Headers, context);
         return Task.FromResult(0);
       }, null);
       await next(context);
