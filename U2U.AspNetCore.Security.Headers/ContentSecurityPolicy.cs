@@ -8,23 +8,39 @@ static class ContentSourceExtensions
 {
   private const string directiveSeperator = "; ";
 
-  public static void AppendContentSources(this StringBuilder sb, List<string> sources)
+  public static StringBuilder AppendContentSources(this StringBuilder sb, List<string> sources)
   {
     foreach (var src in sources)
     {
       sb.Append($" {src}");
     }
-    sb.Append(directiveSeperator);
+    return sb;
   }
+
+  public static StringBuilder AppendNonces(this StringBuilder sb, string forTag, IDictionary<object, object> items)
+  {
+    if (items.ContainsKey(forTag))
+    {
+      var nonces = items[forTag] as List<string>;
+      foreach (var nonce in nonces)
+      {
+        sb.Append($" 'nonce-{nonce}'");
+      }
+    }
+    return sb;
+  }
+
+  public static void AppendDirectiveSeperator(this StringBuilder sb)
+  => sb.Append(directiveSeperator);
 }
 
 public class ContentSecurityPolicy
 {
   public static class Source
   {
-      /// <summary>
-      /// Wildcard, allows any URL except data: blob: filesystem: schemes
-      /// </summary>
+    /// <summary>
+    /// Wildcard, allows any URL except data: blob: filesystem: schemes
+    /// </summary>
     public static string Any = "*";
     /// <summary>
     /// Prevents loading resources from any source.
@@ -103,6 +119,12 @@ public class ContentSecurityPolicy
   public bool ReportOnly { get; set; }
 
   /// <summary>
+  /// Should we look for nonce taghelpers?
+  /// </summary>
+  /// <returns></returns>
+  public bool SupportNonces { get; set; }
+
+  /// <summary>
   /// Defines valid sources for web workers and nested browsing
   /// contexts loaded using elements such as <frame> and <iframe>
   /// </summary>
@@ -113,96 +135,110 @@ public class ContentSecurityPolicy
   /// </summary>
   public List<string> FormAction { get; set; }
 
-/// <summary>
-/// Defines valid sources for embedding the resource
-/// using <frame> <iframe> <object> <embed> <applet>.
-/// Setting this directive to 'none' should be roughly
-/// equivalent to X-Frame-Options: DENY
-/// </summary>
+  /// <summary>
+  /// Defines valid sources for embedding the resource
+  /// using <frame> <iframe> <object> <embed> <applet>.
+  /// Setting this directive to 'none' should be roughly
+  /// equivalent to X-Frame-Options: DENY
+  /// </summary>
   public List<string> FrameAncestors { get; set; }
 
-/// <summary>
-/// Defines valid MIME types for plugins invoked via <object> and <embed>.
-/// To load an <applet> you must specify application/x-java-applet.
-/// </summary>
+  /// <summary>
+  /// Defines valid MIME types for plugins invoked via <object> and <embed>.
+  /// To load an <applet> you must specify application/x-java-applet.
+  /// </summary>
   public List<string> PluginTypes { get; set; }
 
   public string ToHeader(HttpContext context)
   {
-// TODO : retrieve nonces from context
-
+    // TODO : retrieve nonces from context
 
     StringBuilder csp = new StringBuilder();
 
     if (this.DefaultSrc != null && this.DefaultSrc.Any())
     {
-      csp.Append($"default-src");
-      csp.AppendContentSources(this.DefaultSrc);
+      csp.Append($"default-src")
+         .AppendContentSources(this.DefaultSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.ScriptSrc != null && this.ScriptSrc.Any())
     {
-      csp.Append($"script-src");
-      csp.AppendContentSources(this.ScriptSrc);
+      csp.Append($"script-src")
+         .AppendContentSources(this.ScriptSrc)
+         .AppendNonces("script", context.Items)
+         .AppendDirectiveSeperator();
     }
 
     if (this.StyleSrc != null && this.StyleSrc.Any())
     {
-      csp.Append($"style-src");
-      csp.AppendContentSources(this.StyleSrc);
+      csp.Append($"style-src")
+         .AppendContentSources(this.StyleSrc)
+         .AppendNonces("style", context.Items)
+         .AppendDirectiveSeperator();
     }
 
     if (this.ImageSrc != null && this.ImageSrc.Any())
     {
-      csp.Append($"img-src");
-      csp.AppendContentSources(this.ImageSrc);
+      csp.Append($"img-src")
+         .AppendContentSources(this.ImageSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.ConnectSrc != null && this.ConnectSrc.Any())
     {
-      csp.Append($"connect-src");
-      csp.AppendContentSources(this.ConnectSrc);
+      csp.Append($"connect-src")
+         .AppendContentSources(this.ConnectSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.FontSrc != null && this.FontSrc.Any())
     {
-      csp.Append($"connect-src");
-      csp.AppendContentSources(this.FontSrc);
+      csp.Append($"connect-src")
+         .AppendContentSources(this.FontSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.ObjectSrc != null && this.ObjectSrc.Any())
     {
-      csp.Append($"object-src");
-      csp.AppendContentSources(this.ObjectSrc);
+      csp.Append($"object-src")
+         .AppendContentSources(this.ObjectSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.MediaSrc != null && this.MediaSrc.Any())
     {
-      csp.Append($"media-src");
-      csp.AppendContentSources(this.MediaSrc);
+      csp.Append($"media-src")
+         .AppendContentSources(this.MediaSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.ChildSrc != null && this.ChildSrc.Any())
     {
-      csp.Append($"child-src");
-      csp.AppendContentSources(this.ChildSrc);
+      csp.Append($"child-src")
+         .AppendContentSources(this.ChildSrc)
+         .AppendDirectiveSeperator();
     }
 
     if (this.FormAction != null && this.FormAction.Any())
     {
-      csp.Append($"form-action");
-      csp.AppendContentSources(this.FormAction);
+      csp.Append($"form-action")
+         .AppendContentSources(this.FormAction)
+         .AppendDirectiveSeperator();
     }
 
     if (this.FrameAncestors != null && this.FrameAncestors.Any())
     {
-      csp.Append($"frame-ancestors");
-      csp.AppendContentSources(this.FrameAncestors);
+      csp.Append($"frame-ancestors")
+         .AppendContentSources(this.FrameAncestors)
+         .AppendDirectiveSeperator();
     }
 
-    if( this.PluginTypes!= null && this.PluginTypes.Any()) {
-      csp.Append($"plugin-types");
-      csp.AppendContentSources(this.PluginTypes);
+    if (this.PluginTypes != null && this.PluginTypes.Any())
+    {
+      csp.Append($"plugin-types")
+         .AppendContentSources(this.PluginTypes)
+         .AppendDirectiveSeperator();
     }
 
     return csp.ToString();
