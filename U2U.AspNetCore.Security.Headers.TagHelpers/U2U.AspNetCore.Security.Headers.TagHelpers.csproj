@@ -2,8 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+      <OutputType>library</OutputType>
+    <VersionPrefix>1.1.0</VersionPrefix>
+ </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputType>library</OutputType>
   </PropertyGroup>
-  <ItemGroup>
+ <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="1.1.0" />

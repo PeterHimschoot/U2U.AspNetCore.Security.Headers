@@ -16,7 +16,8 @@ namespace U2U.AspNetCore.Security.Headers
       setter += (headers, _) => headers.Add(header, value);
     }
 
-    public void SetHeader(string header, Func<HttpContext, string> buildHeader) {
+    public void SetHeader(string header, Func<HttpContext, string> buildHeader)
+    {
       setter += (headers, context) => headers.Add(header, buildHeader(context));
     }
 
@@ -39,7 +40,15 @@ namespace U2U.AspNetCore.Security.Headers
     {
       string headerName =
         (policy.ReportOnly) ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy";
-      this.SetHeader(headerName, policy.ToHeader);
+
+      if (policy.SupportNonces)
+      {
+        this.SetHeader(headerName, policy.ToHeader);
+      }
+      else
+      {
+        this.SetHeader(headerName, policy.ToHeader(null));
+      }
     }
   }
 }

@@ -7,14 +7,12 @@ namespace U2U.AspNetCore.Security.Headers
   public class ResponseHeadersMiddleware
   {
     private readonly RequestDelegate next;
-    private readonly Action<IHeaderDictionary> headers;
     private readonly ResponseHeadersBuilder headerBuilder;
 
     public ResponseHeadersMiddleware(RequestDelegate next, ResponseHeadersBuilder reponseHeaders)
     {
       this.next = next;
       this.headerBuilder = reponseHeaders;
-      // this.headers = reponseHeaders.Build();
     }
 
     public async Task Invoke(HttpContext context)

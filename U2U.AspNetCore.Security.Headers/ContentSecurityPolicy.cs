@@ -19,7 +19,7 @@ static class ContentSourceExtensions
 
   public static StringBuilder AppendNonces(this StringBuilder sb, string forTag, IDictionary<object, object> items)
   {
-    if (items.ContainsKey(forTag))
+    if (items != null && items.ContainsKey(forTag))
     {
       var nonces = items[forTag] as List<string>;
       foreach (var nonce in nonces)
@@ -166,7 +166,7 @@ public class ContentSecurityPolicy
     {
       csp.Append($"script-src")
          .AppendContentSources(this.ScriptSrc)
-         .AppendNonces("script", context.Items)
+         .AppendNonces("script", context?.Items)
          .AppendDirectiveSeperator();
     }
 
@@ -174,7 +174,7 @@ public class ContentSecurityPolicy
     {
       csp.Append($"style-src")
          .AppendContentSources(this.StyleSrc)
-         .AppendNonces("style", context.Items)
+         .AppendNonces("style", context?.Items)
          .AppendDirectiveSeperator();
     }
 
