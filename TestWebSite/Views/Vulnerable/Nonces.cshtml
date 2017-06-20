@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Using Nonces";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>This page is running inline script and styles.</p>
+<p>Here the script runs and the styles are applied with nonces.</p>
+<p>Nonce = Number used just once.</p>
+
+@section Styles {
+<style nonce="true">
+p {
+  color: green;
+}
+</style>
+}
+
+@section Scripts {
+  <script nonce="true">alert('Use the Nonce!');</script>
+  <script nonce="true">alert('Also ok!');</script>
+}

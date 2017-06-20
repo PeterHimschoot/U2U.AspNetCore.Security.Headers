@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Using Nonces";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>This page is running inline script and styles.</p>
+<p>Here the script runs and styles are applied with sha256's</p>
+<p>The disadvantage of using sha256's is that you need to update them every time you make a change.</p>
+
+@section Styles {
+<style>
+p {
+  color: red;
+}
+</style>
+}
+
+@section Scripts {
+  <script>alert('Hello');</script>
+}

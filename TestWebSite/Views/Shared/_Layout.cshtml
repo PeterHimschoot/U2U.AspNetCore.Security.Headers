@@ -36,19 +36,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li>
-                      <a asp-controller="@nameof(VulnerableController )"
+                      <a asp-controller="@nameof(VulnerableController)"
                          asp-action="@nameof(VulnerableController.ClickJacking)">Click Jacking</a>
                     </li>
                     <li>
-                    <li>
-                      <a asp-controller="@nameof(VulnerableController )"
+                      <a asp-controller="@nameof(VulnerableController)"
                          asp-action="@nameof(VulnerableController.HotLinking)">Hot Linking</a>
                     </li>
-                    </ul>
-                      <a asp-controller="@nameof(HomeController )"
-                         asp-action="@nameof(HomeController.About)">Nonces</a>
+                    <li>
+                      <a asp-controller="@nameof(VulnerableController)"
+                         asp-action="@nameof(VulnerableController.Inline)">Inline scripts</a>
+                    </li>
+                    <li>
+                      <a asp-controller="@nameof(VulnerableController)"
+                         asp-action="@nameof(VulnerableController.Sha256)">Sha256</a>
+                    </li>
+                    <li>
+                      <a asp-controller="@nameof(VulnerableController)"
+                         asp-action="@nameof(VulnerableController.Nonces)">nonces</a>
                     </li>
                     </ul>
             </div>

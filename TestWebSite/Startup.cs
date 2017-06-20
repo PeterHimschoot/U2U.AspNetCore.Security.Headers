@@ -79,12 +79,14 @@ namespace TestWebSite
           },
           ScriptSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,
+              // ContentSecurityPolicy.Source.UnsafeInline,
               "https://ajax.aspnetcdn.com",
-              "'sha256-9FLqevjfni80Rt3z09prhe9sCFtWYVSaHXIcLZKWC+s='"
+              "'sha256-gKHd+pSZOJ3MwBsFalomyNobAcinjJ44ArqbIKlcniQ='"
           },
           StyleSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,
-              "https://ajax.aspnetcdn.com"
+              "https://ajax.aspnetcdn.com",
+              "'sha256-pTnn8NGuYdfLn7/v3BQ2pYxjz73VjHU2Wkr6HjgUgVU='"
           }
         });
       });
