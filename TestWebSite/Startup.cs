@@ -53,6 +53,8 @@ namespace TestWebSite
 
       app.UseResponseHeaders(builder =>
       {
+        // builder.SetHeader("Header", "Value");
+
         builder.SetStrictTransportSecurity(new StrictTransportSecurity
         {
           MaxAge = TimeSpan.FromDays(1),
