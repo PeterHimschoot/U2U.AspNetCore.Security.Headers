@@ -1,11 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Unsafe inline scripts";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
+<h1>Unsafe inline scripts</h1>
+<hr/>
+
+<img class="img-responsive" src="/images/InlineScript.png" />
+
+<div>
+<h2>Embedding inline scripts</h2>
 <p>This page is running inline script and styles.</p>
-<p>Here inline scripts and styles are blocked by CSP.</p>
+<p>However, the <code>Content Security Policy</code> blocks
+unknown inline scripts and styles.</p>
+</div>
+
+<div>
+For example, this style is blocked
+<div>
+<code>
+&lt;style&gt;
+p {
+  color: purple;
+}
+&lt;/style&gt;
+</code>
+</div>
+</div>
+
+<div>
+And this script is also blocked
+
+<div>
+<code>
+&lt;script&gt;alert('Danger!');&lt;/script&gt;
+</code>
+</div>
+</div>
+
+<div>
+<h2>When the browser blocks inline scripts and styles</h2>
 <p>For example, this is Chrome's output in the console</p>
 <img class="img-responsive" src="/images/ChromeConsole1.png" alt="Chrome Console output"/>
 
