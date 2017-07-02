@@ -1,12 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Using Nonces";
+    ViewData["Title"] = "Unsafe inline scripts";
 }
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>This page is running inline script and styles.</p>
-<p>Here scripts and styles are blocked by CSP.</p>
-<p>Please check the Console of your browser.</p>
+<p>Here inline scripts and styles are blocked by CSP.</p>
+<p>For example, this is Chrome's output in the console</p>
+<img class="img-responsive" src="/images/ChromeConsole1.png" alt="Chrome Console output"/>
 
 @section Styles {
 <style>
