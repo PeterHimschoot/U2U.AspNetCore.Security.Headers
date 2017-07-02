@@ -1,8 +1,11 @@
-# Clickjacking
-
-From [OWASP](https://www.owasp.org/index.php/Clickjacking)
-
 ## Preventing the attack
 
-For this you can use the Content Security Policy header.
+**Click Jacking** can be prevented with the `Content Security Policy` header.
 
+Use the frame-ancesters to allow content sources that can embed this page.
+
+If you don't want anyone to frame your site use content source 'none'.
+
+```
+Content-Security-Policy: ...; frame-ancestors 'none';
+```

@@ -77,7 +77,8 @@ namespace TestWebSite
           SupportNonces = true,
           FrameAncestors = new List<string> { ContentSecurityPolicy.Source.None },
           DefaultSrc = new List<string> {
-              ContentSecurityPolicy.Source.Self
+              ContentSecurityPolicy.Source.Self,
+              "https://www.u2u.be"
           },
           ScriptSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,

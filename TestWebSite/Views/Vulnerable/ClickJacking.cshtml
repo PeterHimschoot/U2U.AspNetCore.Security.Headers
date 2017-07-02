@@ -2,10 +2,51 @@
   <link rel="stylesheet" href="/css/clickjacking.css" />
 }
 
+@{
+    ViewData["Title"] = "Click Jacking";
+}
+
+<h1>ClickJacking</h1>
+<hr/>
+
+<img class="img-responsive" src="/images/ClickJacking.jpg" />
+
+<div>
+  <h2>How does ClickJacking work?</h2>
+  <p>The hacker embeds a valid page into an <code>&lt;iframe&gt;</code>.</p>
+  <p>The frame's contents sits in front of the page, and is transparent.</p>
+  <p>This way the user thinks they are clicking the hacker's web page,
+     while they actually are interacting with the embedded site's contents.</p>
+  <p>This way the user is tricked into, for example, clicking a Facebook's like button</p>
+</div>
+
+<div>
+<h2>ClickJacking example</h2>
+<code>
+  &lt;iframe src="https://www.u2u.be"&gt;&lt;/iframe&gt;
+</code>
+
+<br/>
+<br/>
+The page's style hides the iframe:
+<br/>
+<br/>
+
+<code>
+iframe { <br/>
+&nbsp;&nbsp;width: 1200px;<br/>
+&nbsp;&nbsp;height: 800px;<br/>
+&nbsp;&nbsp;opacity: 0.5; /* in real life this would be 0.0 */<br/>
+&nbsp;&nbsp;z-index: -1; /* make if forefront */<br/>
+&nbsp;&nbsp;position: absolute;<br/>
+}<br/>
+</code>
+<br/>
+<br/>
 <div id="frame">
   <iframe src="https://www.u2u.be"></iframe>
 
-  <input id="bait" type="button" value="Win 100000!"/>
+  <!--<input id="bait" type="button" value="Win 100000!"/>-->
 
 
 
