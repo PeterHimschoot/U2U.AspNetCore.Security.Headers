@@ -2,6 +2,41 @@
   <link rel="stylesheet" href="/css/hotlinking.css" />
 }
 
+@{
+    ViewData["Title"] = "Hot Linking to images";
+}
+
+<h1>Hot Linking to images</h1>
+<hr/>
+
+<img class="img-responsive" src="/images/HotLinking.png" />
+
+<div>
+<h2>What is hot linking?</h2>
+<p><em>Hot Linking</em> is when a site uses images (or other media such as videos)
+from another site by directly linking to the image on the other site.<br />
+This might be undesirable since every visit will result in bandwidth
+usage of the other site.</p>
+
+<code>
+  &lt;img src="https://httpsecurityheaders.applephi.net/images/adapterpattern.jpg" /&gt;
+</code>
+</div>
+
+<div>
+<h2>Preventing hotlinking</h2>
+<p>You can prevent sites from hot linking to your media by checking the <em>REFERER</em> header. </br>
+A browser will, when downloading data from another source, send along a REFERER header with the site
+that is using the media. So if another site is downloading media from your server, the url in the REFERER
+header won't match. In case case your server could simply return an error, or return other media.</p>
+</div>
+
+<div>
+<h2>Demo</h2>
+<p>All media from this site are protected by this method.<br/>
+Try hotlinking to this image
+</div>
+
 <div id="hotlinking">
   <img src="/images/adapterpattern.jpg"/>
 <div>
