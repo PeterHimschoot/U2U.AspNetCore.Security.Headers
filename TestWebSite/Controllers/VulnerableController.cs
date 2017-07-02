@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 public class VulnerableController : Controller {
+  public IActionResult OWASP() => View();
   public IActionResult ClickJacking() => View();
   public IActionResult HotLinking() => View();
   public IActionResult Inline() => View();
