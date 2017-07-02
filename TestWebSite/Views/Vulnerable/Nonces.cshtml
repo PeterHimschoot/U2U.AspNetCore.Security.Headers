@@ -1,12 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Using Nonces";
+    ViewData["Title"] = "Running inline script and styles using Nonces";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>This page is running inline script and styles.</p>
-<p>Here the script runs and the styles are applied with nonces.</p>
-<p>Nonce = Number used just once.</p>
+<h1>Running inline scripts and styles with Nonces</h1>
+<hr/>
+
+<img class="img-responsive" src="/images/Nonce.png" />
+
+<div>
+  <h2>Running inline scripts</h2>
+  <p>This page is running inline script and styles.</p>
+  <p>Here the script runs and the styles are applied with nonces.</p>
+  <p><em>Nonce</em> = Number used just once.</p>
+</div>
+
+<div>
+<h2>Using a nonce in the CSP header</h2>
+This time the CSP header contains a nonce value:
+<br/>
+<br/>
+<code>
+  Content-Security-Policy: ... script-src 'self' 'nonce-KQhGGL34bswLhxppyZeOIR61bxc8dYWdFBUs/VnEWHU='
+</code>
+<br/>
+<br/>
+And so does the <code>&lt;script&gt;</code> tag:
+<br/>
+<br/>
+<code>
+  &lt;script nonce="KQhGGL34bswLhxppyZeOIR61bxc8dYWdFBUs/VnEWHU="&gt;alert('Use the Nonce!');&lt;/script&gt;
+</code>
+<br/>
+<br/>
+Of course every request contains a unique nonce,
+so you need server-side logic to embed the nonce.
 
 @section Styles {
 <style nonce="true">
@@ -18,5 +45,4 @@ p {
 
 @section Scripts {
   <script nonce="true">alert('Use the Nonce!');</script>
-  <script nonce="true">alert('Also ok!');</script>
 }
