@@ -1,12 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "Using Nonces";
+    ViewData["Title"] = "Using hashes to allow inline scripts";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>This page is running inline script and styles.</p>
-<p>Here the script runs and styles are applied with sha256's</p>
-<p>The disadvantage of using sha256's is that you need to update them every time you make a change.</p>
+<h1>Using hashes to allow inline scripts</h1>
+<hr/>
+
+<img class="img-responsive" src="/images/Sha256.png" />
+
+<div>
+  <h2>Running inline scripts</h2>
+  <p>This page is running inline script and styles.</p>
+  <p>Here the script runs and styles are applied with sha256's.</p>
+  <p>The value was copied from the browser's output</p>
+</div>
+
+<div>
+<h2>Drawbacks of using hashes</h2>
+<p>The disadvantage of using sha256's is that you need to update
+   the hash (by copying them from the browser's console) every
+   time you make a change to the script.</p>
+</div>
 
 @section Styles {
 <style>
@@ -17,5 +30,11 @@ p {
 }
 
 @section Scripts {
-  <script>alert('Hello');</script>
+  <script>
+  $(function() {
+    $('img').load( function() {
+      alert('Hello');
+    });
+  });
+  </script>
 }

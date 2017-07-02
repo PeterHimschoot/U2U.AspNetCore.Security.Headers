@@ -83,7 +83,7 @@ namespace TestWebSite
               ContentSecurityPolicy.Source.Self,
               // ContentSecurityPolicy.Source.UnsafeInline,
               "https://ajax.aspnetcdn.com",
-              "'sha256-gKHd+pSZOJ3MwBsFalomyNobAcinjJ44ArqbIKlcniQ='"
+              "'sha256-d5/o7Lq1BQizlE+7YpLcN8kzeapQhf2bAgOX+645XGI='"
           },
           StyleSrc = new List<string> {
               ContentSecurityPolicy.Source.Self,
