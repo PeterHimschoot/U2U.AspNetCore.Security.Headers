@@ -8,3 +8,23 @@
 <img class="img-responsive" src="/images/OWASP.jpg" />
 
 <div>
+<h2>About Security Headers</h2>
+<p><a href="https://www.owasp.org">OWASP</a> added a couple of new headers that
+allow you to instruct the browser on how to handle your content.
+
+<ul>
+  <li>
+    <a asp-action="@nameof(VulnerableController.RedirectToUrl)"
+       asp-route-id="1">HTTP Strict Transport Security</a>
+    </li>
+  <li>
+    <a asp-action="@nameof(VulnerableController.RedirectToUrl)"
+       asp-route-id="3">HTTP Public Key Pinning</a>
+    </li>
+  <li>
+    <a asp-action="@nameof(VulnerableController.RedirectToUrl)"
+       asp-route-id="2">Content Security Policy</a>
+    </li>
+</ul>
+</p>
+</div>
