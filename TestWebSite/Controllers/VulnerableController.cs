@@ -11,6 +11,9 @@ public class VulnerableController : Controller
   public IActionResult Sha256() => View();
   public IActionResult Nonces() => View();
 
+  [Route("blogs")]
+  public IActionResult Blogs() => View();
+
   private static Dictionary<int, string> redirects = new Dictionary<int, string> {
     {1, "http://blogs.u2u.be/peter/post/2017/07/02/enforce-https-everywhere-with-the-hsts-header.aspx"},
     {2, "http://blogs.u2u.be/peter/post/2017/06/19/protect-your-dotnet-core-website-with-content-security-policy.aspx"},
