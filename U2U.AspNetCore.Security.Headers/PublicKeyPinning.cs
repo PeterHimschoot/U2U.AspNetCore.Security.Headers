@@ -14,7 +14,7 @@ public class PublicKeyPinning
 
     foreach (var pin in Pins)
     {
-      bob.Append($"pin-sha256={pin}; ");
+      bob.Append($"pin-sha256=\"{pin}\"; ");
     }
 
     bob.Append($"max-age={this.MaxAge.TotalSeconds}; ");
