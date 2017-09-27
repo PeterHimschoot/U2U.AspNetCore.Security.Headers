@@ -96,9 +96,9 @@ namespace TestWebSite
       });
 
       app.UseStaticFiles(new StaticFileOptions {
+        
         ServeUnknownFileTypes = true
       });
-      app.UseDirectoryBrowser();
 
       app.UseMvc(routes =>
       {
