@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace U2U.AspNetCore.Security.Headers
 {
@@ -24,14 +25,9 @@ namespace U2U.AspNetCore.Security.Headers
 
     public async Task Invoke(HttpContext context)
     {
-      var applicationUrl = $"{context.Request.Scheme}://{context.Request.Host.Value}";
-      var headersDictionary = context.Request.Headers;
-      var referrer = headersDictionary[HeaderNames.Referer].ToString();
-
-      // if referer header is missing, or not using the current web site then consider this a problem
-      if (!string.IsNullOrEmpty(referrer) && !referrer.StartsWith(applicationUrl))
+      if (IsHotLinking(context))
       {
-        context.Response.StatusCode = options.StatusCode ?? StatusCodes.Status400BadRequest;
+        context.Response.StatusCode = options.StatusCode ?? StatusCodes.Status401Unauthorized;
         if (options.HandleWithHotLinkImage)
         {
           var unauthorizedImagePath = Path.Combine(rootFolder, options.HotLinkImagePath);
@@ -42,6 +38,38 @@ namespace U2U.AspNetCore.Security.Headers
       {
         await next(context);
       }
+    }
+
+    private bool IsHotLinking(HttpContext context)
+    {
+      var referer = GetRefererHeader(context);
+      if (string.IsNullOrEmpty(referer))
+      {
+        return false;
+      }
+      var applicationUrl = $"{context.Request.Scheme}://{context.Request.Host.Value}";
+      if (referer.StartsWith(applicationUrl))
+      {
+        return false;
+      }
+      if (this.options.HasExceptions)
+      {
+        var refererUri = new Uri(referer);
+        var refererHost = refererUri.Host;
+        var refererPort = refererUri.Port;
+        if (this.options.ExceptedHosts.Any(uri => uri.Host == refererHost && uri.Port == refererPort))
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    private string GetRefererHeader(HttpContext context)
+    {
+      var headersDictionary = context.Request.Headers;
+      var referrer = headersDictionary[HeaderNames.Referer].ToString();
+      return referrer;
     }
   }
 }

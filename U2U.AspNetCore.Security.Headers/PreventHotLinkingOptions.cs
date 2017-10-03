@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace U2U.AspNetCore.Security.Headers
 {
@@ -13,5 +15,9 @@ namespace U2U.AspNetCore.Security.Headers
     public int? StatusCode { get; set; }
 
     public bool ReturnStatusCode => StatusCode.HasValue;
+    
+    public List<Uri> ExceptedHosts { get; set; }
+    
+    public bool HasExceptions => this.ExceptedHosts != null && this.ExceptedHosts.Any();
   }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,11 +40,14 @@ namespace TestWebSite
     {
       loggerFactory.AddConsole(Configuration.GetSection("Logging"));
       loggerFactory.AddDebug();
-      
-      // Redirect to HTTPS
-      var options = new RewriteOptions()
-      .AddRedirectToHttps();
-      app.UseRewriter(options);
+
+      if (!env.IsDevelopment())
+      {
+        // Redirect to HTTPS
+        var options = new RewriteOptions()
+        .AddRedirectToHttps();
+        app.UseRewriter(options);
+      }
 
       if (env.IsDevelopment())
       {
@@ -55,7 +59,10 @@ namespace TestWebSite
         app.UseExceptionHandler("/Home/Error");
       }
 
-      // app.UsePreventHotLinking("images/HotLink.jpeg");
+      app.UsePreventHotLinking( options => {
+        options.HotLinkImagePath = "images/HotLink.jpeg";
+        options.ExceptedHosts = new List<Uri>{ new Uri("http://localhost:5001") };
+      });
 
       app.UseResponseHeaders(builder =>
       {
@@ -101,8 +108,9 @@ namespace TestWebSite
         });
       });
 
-      app.UseStaticFiles(new StaticFileOptions {
-        
+      app.UseStaticFiles(new StaticFileOptions
+      {
+
         ServeUnknownFileTypes = true
       });
 

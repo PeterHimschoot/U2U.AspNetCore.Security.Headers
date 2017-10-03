@@ -25,6 +25,14 @@ namespace Microsoft.AspNetCore.Builder
       return builder;
     }
 
+    public static IApplicationBuilder UsePreventHotLinking(this IApplicationBuilder builder, Action<PreventHotLinkingOptions> setOptions)
+    {
+      var options = new PreventHotLinkingOptions();
+      setOptions(options);
+      return builder.UsePreventHotLinking(options);
+    }
+
+
     public static IApplicationBuilder UsePreventHotLinking(this IApplicationBuilder builder, PreventHotLinkingOptions options)
     {
       builder.UseMiddleware<PreventHotLinkingMiddleware>(options);
