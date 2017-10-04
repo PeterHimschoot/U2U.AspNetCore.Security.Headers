@@ -6,7 +6,7 @@
     ViewData["Title"] = "[rel=noopener]";
 }
 
-<h1>target=_blank rel=noopener</h1>
+<h1>target='_blank' rel='noopener'</h1>
 <hr/>
 
 <img id="targetblank" src="/images/targetblank.png"/>
@@ -14,15 +14,25 @@
 <img id="gotya" src="/images/youfailed.jpg" />
 
 <div>
-  <h2>Why is target=_blank vulnerable?</h2>
-  <p><em>target=_blank</em> allows the new opened tab direct access to the origin's tab through the <code>opener</code>code> object. </code></p>
-  <p>For example, try clicking on <a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank" >this</a></p>
+  <h2>Why is target='_blank' vulnerable?</h2>
+  
+  <p><em>target=_blank</em> allows the new opened tab direct access to the origin's tab through the <code>opener</code> object.</p>
+  <p>For example, try clicking on <a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank">this vulnerable link</a></p>
+  
+  <p><code>
+  &lt;a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank"&gt;Link&lt;/a&gt;
+  </code></p>
+  
   <p>In this innocent example I modify the web page a little, but you could replace the page with a phishing page...</p>
 </div>
 
 <div>
 <h2>How can I fix this?</h2>
   <p>You can easily fix this by setting the <code>rel</code> attribute to <code>noopener</code>. This way the new tab does not receive the opener object.</p>
-  <p>For example, try clicking on <a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank" rel="noopener">this</a></p>
+  <p>For example, try clicking on <a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank" rel="noopener">this safe link</a></p>
+  
+  <p><code>
+  &lt;a href="https://httpsecurityheaders.applephi.net/Vulnerable/SameOrigin" target="_blank" rel="noopener"&gt;Link&lt;/a&gt;
+  </code></p>
 </div>
 
