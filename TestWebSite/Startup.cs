@@ -61,7 +61,7 @@ namespace TestWebSite
 
       app.UsePreventHotLinking( options => {
         options.HotLinkImagePath = "images/HotLink.jpeg";
-        options.ExceptedHosts = new List<Uri>{ new Uri("http://localhost:5001") };
+        options.ExceptedHosts = new List<Uri>{ new Uri("https://blogs.u2u.be") };
       });
 
       app.UseResponseHeaders(builder =>
