@@ -10,6 +10,8 @@ public class VulnerableController : Controller
   public IActionResult UnsafeInline() => View();
   public IActionResult Sha256() => View();
   public IActionResult Nonces() => View();
+  public IActionResult TargetBlank() => View();
+  public IActionResult SameOrigin() => View();
 
   [Route("blogs")]
   public IActionResult Blogs() => View();

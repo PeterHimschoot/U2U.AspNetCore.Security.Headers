@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "[rel=noopener]";
+}
+
+<h1>Why not checkout your previous tab?</h1>
+<script nonce="true">
+  if(window.opener) {
+    window.opener.location = 'https://httpsecurityheaders.applephi.net/Vulnerable/TargetBlank#gotya'
+  } else {
+    document.querySelector('h1').innerHTML = 'Using rel=noopener. Good developer!';
+  }
+</script>

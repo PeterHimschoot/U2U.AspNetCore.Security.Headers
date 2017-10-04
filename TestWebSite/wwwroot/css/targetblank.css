@@ -1,0 +1,10 @@
+#gotya {
+  display: none;
+}
+#gotya:target {
+  display: flex; 
+  justify-content: center;
+}
+#targetblank {
+  width: 100%;
+}
