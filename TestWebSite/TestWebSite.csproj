@@ -14,8 +14,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="U2U.AspNetCore.Mvc.TagHelpers" Version="1.1.0" />
     <PackageReference Include="U2U.AspNetCore.Mvc.NameOf" Version="1.1.0" />
-    <PackageReference Include="U2U.AspNetCore.Security.Headers" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />

@@ -75,16 +75,16 @@ namespace TestWebSite
           Preload = false
         });
 
-        builder.SetPublicKeyPinning(new PublicKeyPinning
-        {
-          MaxAge = TimeSpan.FromDays(10),
-          IncludeSubdomains = true,
-          Pins = new List<string> {
-              "yh0kYiYm4YN+0DAKp4bB16pGqrQq9btXHMeR9jz834o=", // current certificate
-              "YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=", // Let's Encrypt Authority X3
-              "SEnt86CqqSYlSIlLcfnKdJdoS8NJG1EG+/5b5qtvmUY="  // backup cert
-              }
-        });
+        //builder.SetPublicKeyPinning(new PublicKeyPinning
+        //{
+        //  MaxAge = TimeSpan.FromDays(10),
+        //  IncludeSubdomains = true,
+        //  Pins = new List<string> {
+        //      "yh0kYiYm4YN+0DAKp4bB16pGqrQq9btXHMeR9jz834o=", // current certificate
+        //      "YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=", // Let's Encrypt Authority X3
+        //      "SEnt86CqqSYlSIlLcfnKdJdoS8NJG1EG+/5b5qtvmUY="  // backup cert
+        //      }
+        //});
 
         builder.SetContentSecurityPolicy(new ContentSecurityPolicy()
         {
